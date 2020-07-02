@@ -1,0 +1,163 @@
+DROP TABLE public.amusementpark;
+drop table aquarium;
+DROP TABLE public.beaches;
+DROP TABLE public.usstate;
+DROP TABLE public.passengers;
+DROP TABLE public.airfare;
+DROP TABLE public.hotelratings;
+DROP TABLE public.campsite;
+DROP TABLE public.nationalpark;
+DROP TABLE public.zoo;
+DROP TABLE public.malls;
+DROP TABLE public.festival;
+DROP TABLE public.casinos;
+
+
+CREATE TABLE public.amusementpark
+(
+    amusementpark_id bigint primary key,
+    "amusementpark_name" varchar(1000),
+    "city" varchar(500),
+    "state" varchar(50)
+)
+WITH (
+    OIDS = FALSE
+)
+TABLESPACE pg_default;
+
+CREATE TABLE public.aquarium
+(
+    aquarium_id bigint primary key,
+    aquarium_name varchar(1000)  ,
+    "state" varchar(50)
+)
+WITH (
+    OIDS = FALSE
+)
+TABLESPACE pg_default;
+
+CREATE TABLE public.beaches
+(
+     beach_id bigint primary key,
+     beach_name varchar(1000),
+    "state" varchar(50)
+)
+WITH (
+    OIDS = FALSE
+)
+TABLESPACE pg_default;
+
+CREATE TABLE public.festival
+(
+	festival_id bigint primary key,    
+	"festival_name" varchar(1000),
+         "state" varchar(50)
+)
+WITH (
+    OIDS = FALSE
+)
+TABLESPACE pg_default;
+
+
+CREATE TABLE public.malls
+(
+        malls_id bigint primary key,
+	shoppingmall_name varchar(1000),
+    	"state" varchar(50)
+)
+WITH (
+    OIDS = FALSE
+)
+TABLESPACE pg_default;
+
+CREATE TABLE public.zoo
+(
+	"zoo_id" bigint primary key,    
+	"zoo_name" varchar(1000),
+        "state" varchar(50)
+)
+WITH (
+    OIDS = FALSE
+)
+TABLESPACE pg_default;
+
+CREATE TABLE public.casinos
+(
+    casino_id bigint primary key,
+    casino  varchar(1000) ,
+    state varchar(200)
+)
+WITH (
+    OIDS = FALSE
+)
+TABLESPACE pg_default;
+
+CREATE TABLE public.nationalpark
+(
+	park_id bigint primary key,    
+	national_park_name varchar(1000),
+   	state varchar(200)
+)
+WITH (
+    OIDS = FALSE
+)
+TABLESPACE pg_default;
+
+CREATE TABLE public.campsite
+(
+	camp_id bigint primary key,    
+	name  varchar(1000) ,
+        state varchar(200)
+)
+WITH (
+    OIDS = FALSE
+)
+TABLESPACE pg_default;
+
+
+CREATE TABLE public.hotelratings
+(
+    province varchar(1000),
+    ratings_average float,
+    ratings_count float
+)
+WITH (
+    OIDS = FALSE
+)
+TABLESPACE pg_default;
+
+
+
+CREATE TABLE public.airfare
+(
+    state varchar(100),
+    average_airfare double precision
+)
+WITH (
+    OIDS = FALSE
+)
+TABLESPACE pg_default;
+
+
+CREATE TABLE public.passengers
+(
+    state varchar(100),
+    passenger_amount decimal(18,5)
+)
+WITH (
+    OIDS = FALSE
+)
+TABLESPACE pg_default;
+
+CREATE TABLE public.usstate
+(
+    state varchar(100),
+    abbr varchar(10),
+    states_value decimal(18,4) ,
+    "Latitude" decimal(18,4) ,
+    "Longitude" decimal(18,4) 
+)
+WITH (
+    OIDS = FALSE
+)
+TABLESPACE pg_default;

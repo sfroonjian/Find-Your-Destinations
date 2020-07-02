@@ -1,0 +1,134 @@
+DROP TABLE public.usetravelapp;
+CREATE TABLE public.usetravelapp
+(
+    state varchar(100) primary key,
+    abbr text COLLATE pg_catalog."default",
+    states_value double precision,
+    "Latitude" double precision,
+    "Longitude" double precision,
+    count_amusement_park bigint,
+    count_aquarium bigint,
+    count_beach bigint,
+    count_casino bigint,
+    count_festival bigint,
+    count_hotelratings integer,
+    count_malls bigint,
+    count_parks bigint,
+    count_campsite bigint,
+    count_zoo bigint,
+    total_count numeric,
+    airfare_rank bigint,
+    passenger_rank bigint,
+    rank_number bigint 
+)
+WITH (
+    OIDS = FALSE
+)
+TABLESPACE pg_default;
+
+
+
+insert into usetravelapp
+select 
+a.state,
+a.abbr,
+a.states_value,
+a."Latitude",
+a."Longitude",
+count_amusement_park,
+count_aquarium,
+count_beach,
+count_casino,
+count_festival,
+count_hotelratings,
+count_malls,
+count_parks,
+--passenger_amount,
+count_campsite,
+count_zoo,
+case when total_count is null then 0 else total_count end as total_count ,
+airfare_rank,
+passenger_rank,
+	  RANK () OVER ( 
+		ORDER BY total_count desc 
+	) rank_number 
+from
+(
+select 
+a.state,
+a.abbr,
+a.states_value,
+a."Latitude",
+a."Longitude",
+count_amusement_park,
+count_aquarium,
+count_beach,
+count_casino,
+count_festival,
+count_hotelratings,
+count_malls,
+count_parks,
+	airfare_rank,
+	passenger_rank,
+--passenger_amount,
+count_campsite,
+count_zoo,
+(count_zoo+count_campsite*0.1+count_parks+count_malls+count_hotelratings+count_festival+
+	  count_casino+count_beach+count_aquarium+count_amusement_park+airfare_rank+passenger_rank) as total_count
+from
+	  (
+SELECT a.state,
+a.abbr,
+a.states_value,
+a."Latitude",
+a."Longitude",
+case when count_amusement_park is null then 0 else count_amusement_park end as count_amusement_park ,
+case when count_aquarium is null then 0 else  count_aquarium end as count_aquarium ,
+case when count_beach is null then 0 else count_beach end as count_beach ,
+case when count_casino is null then 0 else count_casino end as count_casino ,
+case when count_festival is null then 0 else count_festival end as count_festival ,
+case when count_hotelratings is null then 0 else count_hotelratings end as count_hotelratings ,
+case when count_malls is null then 0 else count_malls end as count_malls ,
+case when count_parks is null then 0 else count_parks  end as count_parks,
+--case when passenger_amount is null then 0 else passenger_amount end as passenger_amount ,
+case when count_campsite is null then 0 else count_campsite end as count_campsite ,
+case when count_zoo is null then 0 else count_zoo end as count_zoo,
+case when airfare_rank is null then 0 else airfare_rank end as airfare_rank ,
+case when passenger_rank is null then 0 else passenger_rank end as passenger_rank
+FROM usstate  a 
+left join (select trim(state) state,
+		   RANK () OVER ( 
+		ORDER BY average_airfare desc 
+	) airfare_rank 
+		    from public.airfare) b on upper(a.abbr)=b.state
+left join (select trim(state) state , count(amusementpark_name) count_amusement_park
+		   from public.amusementpark group by 1) c on a.state=trim(c.state)
+left join (select trim(state) state , count(aquarium_name) count_aquarium
+		   from public.aquarium d group by 1) d on a.state=trim(d.state)
+left join (select trim(state) state , count(beach_name) count_beach
+		   from public.beaches group by 1) e on a.state=trim(e.state)
+left join (select trim(state) state , count(casino) count_casino
+		   from public.casinos group by 1 )f  on a.state=trim(f.state)
+left join (select trim(state) state, count(festival_name) count_festival
+		   from public.festival group by 1 order by 1) g on a.state=trim(g.state)
+left join (select province , cast(sum(ratings_count) as int) count_hotelratings
+		   from public.hotelratings group by 1) h on upper(a.abbr)=h.province
+left join (select trim(state) state , count(shoppingmall_name) count_malls
+		   from public.malls group by 1 )i on  a.state=trim(i.state)
+left join (select trim(state) state , count(national_park_name) count_parks
+		   from public.nationalpark group by 1) j on a.state=trim(j.state)
+left join (select trim(state) state, 
+		   RANK () OVER ( 
+		ORDER BY passenger_amount 
+	) passenger_rank 
+		   from public.passengers) k on upper(a.abbr)=trim(k.state)
+left join (select trim(state) state , count(zoo_name) count_zoo
+		   from public.zoo group by 1) L on a.state=trim(L.state)
+left join (select trim(state) state , count("name") count_campsite
+		   from public.campsite group by 1) m on upper(a.state)=upper(m.state)
+---group by 1,2,3,4,5
+)a
+	) a
+	;
+select * from usetravelapp;
+
