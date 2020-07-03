@@ -133,22 +133,49 @@ d3.json(rank_url, function (state_ranks) {
           var state_info_url = `/${feature.properties.name}`;
           d3.json(state_info_url, function (state_info) {
 
-            layer.bindPopup("<h1>" + Object.values(state_info[0])[14] + "</h1> <hr> <h2> Rank: " + Object.values(state_info[0])[12] + "</h2> <hr> "
-              + "Airfare Rank: " + Object.values(state_info[0])[1] + "<br>"
-              + "Passenger Amount Rank: " + Object.values(state_info[0])[13] + "<br>"
-              + "Dollar Value: $" + Object.values(state_info[0])[7] + "<br>"
-              + "Passenger Amount Rank: " + Object.values(state_info[0])[9] + "<br>"
-              + "<hr>"
-              + "Amusements: " + Object.values(state_info[0])[2] + "<br>"
-              + "Aquariums: " + Object.values(state_info[0])[3] + "<br>"
-              + "Beaches: " + Object.values(state_info[0])[4] + "<br>"
-              + "Campsites: " + Object.values(state_info[0])[5] + "<br>"
-              + "Casions: " + Object.values(state_info[0])[6] + "<br>"
-              + "Festivals: " + Object.values(state_info[0])[8] + "<br>"
-              + "Malls: " + Object.values(state_info[0])[10] + "<br>"
-              + "National Parks: " + Object.values(state_info[0])[11] + "<br>"
-              + "Zoos: " + Object.values(state_info[0])[15] + "<br>"
-            );
+            
+
+            // layer.bindPopup("<h1>" + Object.values(state_info[0])[14] + "</h1> <hr> <h2> Rank: " + Object.values(state_info[0])[12] + "</h2> <hr> "
+            //   + "Airfare Rank: " + Object.values(state_info[0])[1] + "<br>"
+            //   + "Passenger Amount Rank: " + Object.values(state_info[0])[13] + "<br>"
+            //   + "Dollar Value: $" + Object.values(state_info[0])[7] + "<br>"
+            //   + "Passenger Amount Rank: " + Object.values(state_info[0])[9] + "<br>"
+            //   + "<hr>"
+            //   + "Amusements: " + Object.values(state_info[0])[2] + "<br>"
+            //   + "Aquariums: " + Object.values(state_info[0])[3] + "<br>"
+            //   + "Beaches: " + Object.values(state_info[0])[4] + "<br>"
+            //   + "Campsites: " + Object.values(state_info[0])[5] + "<br>"
+            //   + "Casions: " + Object.values(state_info[0])[6] + "<br>"
+            //   + "Festivals: " + Object.values(state_info[0])[8] + "<br>"
+            //   + "Malls: " + Object.values(state_info[0])[10] + "<br>"
+            //   + "National Parks: " + Object.values(state_info[0])[11] + "<br>"
+            //   + "Zoos: " + Object.values(state_info[0])[15] + "<br>"
+            // );
+
+            
+            zoomChart.onAdd = function () {
+
+              // creates a div in the html with the class "legend"
+             
+              
+              tableDiv.innerHTML = "<h1>" + Object.values(state_info[0])[14] + "</h1> <hr> <h2> Rank: " + Object.values(state_info[0])[12] + "</h2> <hr> "
+                + "Airfare Rank: " + Object.values(state_info[0])[1] + "<br>"
+                + "Passenger Amount Rank: " + Object.values(state_info[0])[13] + "<br>"
+                + "Dollar Value: $" + Object.values(state_info[0])[7] + "<br>"
+                + "Average Hotel Ratings: " + Object.values(state_info[0])[9] + "<br>"
+                + "<hr>"
+                + "Amusements: " + Object.values(state_info[0])[2] + "<br>"
+                + "Aquariums: " + Object.values(state_info[0])[3] + "<br>"
+                + "Beaches: " + Object.values(state_info[0])[4] + "<br>"
+                + "Campsites: " + Object.values(state_info[0])[5] + "<br>"
+                + "Casions: " + Object.values(state_info[0])[6] + "<br>"
+                + "Festivals: " + Object.values(state_info[0])[8] + "<br>"
+                + "Malls: " + Object.values(state_info[0])[10] + "<br>"
+                + "National Parks: " + Object.values(state_info[0])[11] + "<br>"
+                + "Zoos: " + Object.values(state_info[0])[15] + "<br>";
+              return tableDiv;
+            };
+            zoomChart.addTo(map);
 
           });
 
@@ -160,6 +187,9 @@ d3.json(rank_url, function (state_ranks) {
 
     }
   }).addTo(map);
+
+  var zoomChart = L.control({ position: 'topright' });
+  const tableDiv = L.DomUtil.create('div', "tabledata");
 
   var legend = L.control({ position: 'bottomright' });
   legend.onAdd = function () {
