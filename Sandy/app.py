@@ -61,43 +61,43 @@ def dynamic(state):
 
     travel_num = session.query(combined_table.state, combined_table.abbr, combined_table.states_value, combined_table.count_amusement_park, combined_table.count_aquarium, combined_table.count_beach, combined_table.count_casino, combined_table.count_festival, combined_table.count_hotelratings, combined_table.count_malls, combined_table.count_parks, combined_table.count_campsite, combined_table.count_zoo, combined_table.airfare_rank, combined_table.passenger_rank, combined_table.rank_number).\
         filter(combined_table.state == state).all()
-    session.close()
+    # session.close()
 
     amusement_query = session.query(amusement_table.amusementpark_name).\
         filter(amusement_table.state == state).all()
-    session.close()
+    # session.close()
 
     aquarium_query = session.query(aquarium_table.aquarium_name).\
         filter(aquarium_table.state == state).all()
-    session.close()
+    # session.close()
 
     beach_query = session.query(beach_table.beach_name).\
         filter(beach_table.state == state).all()
-    session.close()
+    # session.close()
 
     campsite_query = session.query(campsite_table.name).\
         filter(campsite_table.state == state).all()
-    session.close()
+    # session.close()
 
     casino_query = session.query(casino_table.casino).\
         filter(casino_table.state == state).all()
-    session.close()
+    # session.close()
 
     festival_query = session.query(festival_table.festival_name).\
         filter(festival_table.state == state).all()
-    session.close()
+    # session.close()
 
     mall_query = session.query(mall_table.shoppingmall_name).\
         filter(mall_table.state == state).all()
-    session.close()
+    # session.close()
 
     park_query = session.query(park_table.national_park_name).\
         filter(park_table.state == state).all()
-    session.close()
+    # session.close()
 
     zoo_query = session.query(zoo_table.zoo_name).\
         filter(zoo_table.state == state).all()
-    session.close()
+    # session.close()
 
 
      # add all data into a list to be jsonified
@@ -187,7 +187,7 @@ def dynamic(state):
             for item in zoo:
                 zoo_list.append(item)
             attraction_dict["zoo_list"] = zoo_list
-        start_list.append(attraction_dict)
+    start_list.append(attraction_dict)
 
     return jsonify(start_list)
 
