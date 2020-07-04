@@ -164,7 +164,7 @@ var amusements = d3.select("#amusement");
 var aquariums = d3.select("#aquarium");
 var beaches = d3.select("#beach");
 var campsites = d3.select("#campsite");
-var casinos = d3.select("#casinos");
+var casinos = d3.select("#casino");
 var festivals = d3.select("#festival");
 var malls = d3.select("#mall");
 var parks = d3.select("#park");
@@ -223,7 +223,7 @@ function attraction_lists(state) {
     };
 
     zoos.html("");
-    var zoo_list = state_info[1]["casino_list"];
+    var zoo_list = state_info[1]["zoo_list"];
     for (var index in zoo_list) {
       zoos.append("li").text(zoo_list[index]);
     };
