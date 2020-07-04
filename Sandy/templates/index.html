@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+  <title>FIND YOUR DESTINATION</title>
+
+  <!-- Leaflet CSS and Script -->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.6.0/dist/leaflet.css" />
+  <script src="https://unpkg.com/leaflet@1.6.0/dist/leaflet.js"></script>
+
+  <!-- frappe charts -->
+  <script src="https://unpkg.com/frappe-charts@latest"></script>
+
+  <!-- Stylesheets -->
+  <link rel="stylesheet" href="../static/css/bootstrap.min.css">
+  <link rel="stylesheet" href="../static/css/style.css">
+
+
+  <!-- Javascript -->
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+    integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+    crossorigin="anonymous"></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+    integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+    crossorigin="anonymous"></script>
+
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+    integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+    crossorigin="anonymous"></script>
+
+  <!-- d3 JavaScript -->
+  <script src="https://d3js.org/d3.v4.min.js"></script>
+
+
+
+
+</head>
+
+<body>
+
+  <!-- Jumbotron -->
+  <div class="jumbotron text-center">
+
+    <!-- Title -->
+    <h1 class="card-title h1 pb-2">Where Would You Like To Go?</h1>
+
+    <!-- Card image -->
+    <div class="view overlay my-4">
+      <img src="https://img.wallpapersafari.com/desktop/1920/1080/41/81/fzugk2.jpg" class="img-fluid" alt="">
+        <div class="mask rgba-white-slight"></div>
+      </a>
+    </div>
+      <h5 class="indigo-text h5 mb-4">Select a state</h5>
+      <p class="card-text">Find a list of your favorite attractions</p>
+  </div>
+
+  <div class="container-fluid">
+    <div class="mapbox">
+      <div id="map"></div>
+    </div>
+    </div>
+</div>
+  </div>
+
+<!-- truncate legend in the docs for frappe -->
+  <div class="container">
+    <div class="row">
+      <div class="col-md-6">
+        <div class="pie-chart">
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="bar-chart">
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <br>
+
+  <!-- Tab links -->
+  <div class="tab">
+    <button class="tablinks" onclick="openTab(event, 'amusement')">Amusement Parks</button>
+    <button class="tablinks" onclick="openTab(event, 'aquarium')">Aquariums</button>
+    <button class="tablinks" onclick="openTab(event, 'beach')">Beaches</button>
+    <button class="tablinks" onclick="openTab(event, 'campsite')">Campsites</button>
+    <button class="tablinks" onclick="openTab(event, 'casino')">Casinos</button>
+    <button class="tablinks" onclick="openTab(event, 'festival')">Festivals</button>
+    <button class="tablinks" onclick="openTab(event, 'mall')">Malls</button>
+    <button class="tablinks" onclick="openTab(event, 'park')">National Parks</button>
+    <button class="tablinks" onclick="openTab(event, 'zoo')">Zoos</button>
+  </div>
+
+  <!-- Tab content -->
+  <div id="amusement" class="tabcontent">
+  </div>
+
+  <div id="aquarium" class="tabcontent">
+  </div>
+
+  <div id="beach" class="tabcontent">
+  </div>
+
+  <div id="campsite" class="tabcontent">
+  </div>
+
+  <div id="casino" class="tabcontent">
+  </div>
+
+  <div id="festival" class="tabcontent">
+  </div>
+
+  <div id="mall" class="tabcontent">
+  </div>
+
+  <div id="park" class="tabcontent">
+  </div>
+
+  <div id="zoo" class="tabcontent">
+  </div>
+
+  <div class="container">
+    <footer class="page-footer font-small blue">
+      <div class="footer-copyright text-center py-3">© 2020 Copyright:
+        <a href="#"> Best Group 3 Project 2</a>
+      </div>
+    </footer>
+  </div>
+
+  <!-- API key -->
+  <script type="text/javascript" src="../static/js/config.js"></script>
+  <!-- JS  -->
+  <script type="text/javascript" src="../static/js/logic.js"></script>
+  
+
+</body>
+
+</html>
