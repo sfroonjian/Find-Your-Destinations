@@ -1,14 +1,12 @@
 # import dependencies
-import numpy as np
 import sqlalchemy
 from sqlalchemy.ext.automap import automap_base
 from sqlalchemy.orm import Session
 from sqlalchemy import create_engine, func
 from flask import Flask, render_template, redirect, jsonify
-from config import password
 
 #database setup
-connection_string = f'postgres:{password}@localhost:5432/ustravelapp_db'
+connection_string = "zpjizxycnurjbc:316e2d20f26aba3cbf291801ed6aa09839b784cc9dbee150684ba29885407a85@ec2-18-214-211-47.compute-1.amazonaws.com:5432/ddorlm8072jlck"
 engine = create_engine(f'postgresql://{connection_string}')
 # reflect an existing database into a new model
 Base = automap_base()
@@ -127,9 +125,9 @@ def dynamic(state):
         start_list_dict["airfare_rank"] = airfare_rank
         start_list_dict["passenger_rank"] = passenger_rank
         start_list_dict["overall_rank"] = rank
-        start_list_dict["average_airfare"] = round(airfare, 2)
+        start_list_dict["average_airfare"] = airfare
         start_list_dict["amount_passengers"] = passenger
-        start_list_dict["average_hotel_rating"] = round(rating, 2)
+        start_list_dict["average_hotel_rating"] = rating
         start_list_dict["dollar_value_rank"] = dollar_rank
         start_list.append(start_list_dict)
     
