@@ -22,6 +22,7 @@ CREATE TABLE public.usetravelapp
 	airfare_value double precision,
 	passenger_value double precision,
 	hotel_ratings double precision,
+	state_value_rank bigint,
     rank_number bigint 
 )
 WITH (
@@ -52,9 +53,12 @@ count_zoo,
 case when total_count is null then 0 else total_count end as total_count ,
 airfare_rank,
 passenger_rank,
-cast (airfare_value as decimal(18,2)) as airfare_value,
-cast(passenger_value as decimal(18,2)) as passenger_value ,
-cast(hotel_ratings as decimal(18,2)) as hotel_ratings ,
+airfare_value,
+passenger_value,
+hotel_ratings,
+state_value_rank,
+
+
 	  RANK () OVER ( 
 		ORDER BY total_count desc 
 	) rank_number 
@@ -82,8 +86,9 @@ count_zoo,
 airfare_value,
 passenger_value,
 hotel_ratings,
+state_value_rank,
 (count_zoo+count_campsite*0.1+count_parks+count_malls+count_hotelratings+count_festival+
-	  count_casino+count_beach+count_aquarium+count_amusement_park+airfare_rank+passenger_rank) as total_count
+	  count_casino+count_beach+count_aquarium+count_amusement_park+airfare_rank+passenger_rank+state_value_rank) as total_count
 from
 	  (
 SELECT a.state,
@@ -106,9 +111,13 @@ case when airfare_rank is null then 0 else airfare_rank end as airfare_rank ,
 case when passenger_rank is null then 0 else passenger_rank end as passenger_rank,
 airfare_value,
 passenger_value,
-hotel_ratings
+hotel_ratings,
+state_value_rank
 
-FROM usstate  a 
+FROM ( select state, abbr, states_value,"Latitude","Longitude",
+		   RANK () OVER ( ORDER BY states_value )as  state_value_rank
+		   from usstate 
+		   group by 1,2,3,4,5)  a 
 left join (select trim(state) state,average_airfare as airfare_value,
 		   RANK () OVER ( 
 		ORDER BY average_airfare desc 
@@ -124,8 +133,15 @@ left join (select trim(state) state , count(casino) count_casino
 		   from public.casinos group by 1 )f  on a.state=trim(f.state)
 left join (select trim(state) state, count(festival_name) count_festival
 		   from public.festival group by 1 order by 1) g on a.state=trim(g.state)
-left join (select province , cast(sum(ratings_count) as int) count_hotelratings,sum(ratings_average) as hotel_ratings
-		   from public.hotelratings group by 1) h on upper(a.abbr)=h.province
+left join (
+           select province ,ratings_average,
+           RANK () OVER ( ORDER BY ratings_average )as  count_hotelratings,
+		   sum(ratings_average) as hotel_ratings
+
+		   from public.hotelratings group by 1,2
+
+
+		   ) h on upper(a.abbr)=h.province
 left join (select trim(state) state , count(shoppingmall_name) count_malls
 		   from public.malls group by 1 )i on  a.state=trim(i.state)
 left join (select trim(state) state , count(national_park_name) count_parks
