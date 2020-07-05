@@ -5,9 +5,10 @@ from sqlalchemy.ext.automap import automap_base
 from sqlalchemy.orm import Session
 from sqlalchemy import create_engine, func
 from flask import Flask, render_template, redirect, jsonify
+from config import password
 
 #database setup
-connection_string = "postgres:applepie28@localhost:5432/ustravelapp_db"
+connection_string = f'postgres:{password}@localhost:5432/ustravelapp_db'
 engine = create_engine(f'postgresql://{connection_string}')
 # reflect an existing database into a new model
 Base = automap_base()
@@ -25,9 +26,6 @@ festival_table = Base.classes.festival
 mall_table = Base.classes.malls
 park_table = Base.classes.nationalpark
 zoo_table = Base.classes.zoo
-# airfare_table = Base.classes.airfare
-# passenger_table = Base.classes.passengers
-# hotel_table = Base.classes.hotelratings
 
 # Flask Setup
 app = Flask(__name__)
@@ -67,7 +65,7 @@ def dynamic(state):
     session = Session(engine)
 
     # query to obtain overall data of the state, such as amount of each type of attraction
-    travel_num = session.query(combined_table.state, combined_table.abbr, combined_table.states_value, combined_table.count_amusement_park, combined_table.count_aquarium, combined_table.count_beach, combined_table.count_casino, combined_table.count_festival, combined_table.count_hotelratings, combined_table.count_malls, combined_table.count_parks, combined_table.count_campsite, combined_table.count_zoo, combined_table.airfare_rank, combined_table.passenger_rank, combined_table.rank_number).\
+    travel_num = session.query(combined_table.state, combined_table.abbr, combined_table.states_value, combined_table.count_amusement_park, combined_table.count_aquarium, combined_table.count_beach, combined_table.count_casino, combined_table.count_festival, combined_table.count_hotelratings, combined_table.count_malls, combined_table.count_parks, combined_table.count_campsite, combined_table.count_zoo, combined_table.airfare_rank, combined_table.passenger_rank, combined_table.rank_number, combined_table.airfare_value, combined_table.passenger_value, combined_table.hotel_ratings, combined_table.state_value_rank).\
         filter(combined_table.state == state).all()
     session.close()
 
@@ -108,14 +106,10 @@ def dynamic(state):
         filter(zoo_table.state == state).all()
     session.close()
 
-    # airfare_query = session.query(airfare_table.average_airfare).\
-    #     filter(airfare_table.state == state).all()
-    # session.close()
-
-
      # add all data into a list to be jsonified
     start_list = []
-    for state, abbr, dollar, amusement_num, aquarium_num, beach_num, casino_num, festival_num, hotel, mall_num, park_num, campsite_num, zoo_num, airfare, passenger, rank in travel_num:
+    # start_list_dict = {}
+    for state, abbr, dollar, amusement_num, aquarium_num, beach_num, casino_num, festival_num, hotel_rank, mall_num, park_num, campsite_num, zoo_num, airfare_rank, passenger_rank, rank, airfare, passenger, rating, dollar_rank in travel_num:
         start_list_dict = {}
         start_list_dict["state"] = state
         start_list_dict["abbreviation"] = abbr
@@ -125,14 +119,18 @@ def dynamic(state):
         start_list_dict["beach_num"] = beach_num
         start_list_dict["casino_num"] = casino_num
         start_list_dict["festival_num"] = festival_num
-        start_list_dict["hotel_ratings"] = hotel
+        start_list_dict["hotel_ratings_rank"] = hotel_rank
         start_list_dict["mall_num"] = mall_num
         start_list_dict["national_park_num"] = park_num
         start_list_dict["campsite_num"] = campsite_num
         start_list_dict["zoo_num"] = zoo_num
-        start_list_dict["airfare_rank"] = airfare
-        start_list_dict["passenger_rank"] = passenger
+        start_list_dict["airfare_rank"] = airfare_rank
+        start_list_dict["passenger_rank"] = passenger_rank
         start_list_dict["overall_rank"] = rank
+        start_list_dict["average_airfare"] = round(airfare, 2)
+        start_list_dict["amount_passengers"] = passenger
+        start_list_dict["average_hotel_rating"] = round(rating, 2)
+        start_list_dict["dollar_value_rank"] = dollar_rank
         start_list.append(start_list_dict)
     
     amusement_list = []

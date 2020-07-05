@@ -146,41 +146,24 @@ d3.json(rank_url, function (state_ranks) {
           // imports api data from the dynamic local host url
           d3.json(state_info_url, function (state_info) {
 
-            // layer.bindPopup("<h1>" + Object.values(state_info[0])[14] + "</h1> <hr> <h2> Rank: " + Object.values(state_info[0])[12] + "</h2> <hr> "
-            //   + "Airfare Rank: " + Object.values(state_info[0])[1] + "<br>"
-            //   + "Passenger Amount Rank: " + Object.values(state_info[0])[13] + "<br>"
-            //   + "Dollar Value: $" + Object.values(state_info[0])[7] + "<br>"
-            //   + "Passenger Amount Rank: " + Object.values(state_info[0])[9] + "<br>"
-            //   + "<hr>"
-            //   + "Amusements: " + Object.values(state_info[0])[2] + "<br>"
-            //   + "Aquariums: " + Object.values(state_info[0])[3] + "<br>"
-            //   + "Beaches: " + Object.values(state_info[0])[4] + "<br>"
-            //   + "Campsites: " + Object.values(state_info[0])[5] + "<br>"
-            //   + "Casions: " + Object.values(state_info[0])[6] + "<br>"
-            //   + "Festivals: " + Object.values(state_info[0])[8] + "<br>"
-            //   + "Malls: " + Object.values(state_info[0])[10] + "<br>"
-            //   + "National Parks: " + Object.values(state_info[0])[11] + "<br>"
-            //   + "Zoos: " + Object.values(state_info[0])[15] + "<br>"
-            // );
-
             zoomChart.onAdd = function () {
               // creates a pop-up on the right hand side of the map when a user clicks on a state
               // detailed data on the state will appear in that pop-up
-              tableDiv.innerHTML = "<h1>" + Object.values(state_info[0])[14] + "</h1> <hr> <h3> Rank: " + Object.values(state_info[0])[12] + "</h3> <hr> "
-                + "Airfare Rank: " + Object.values(state_info[0])[1] + "<br>"
-                + "Passenger Amount Rank: " + Object.values(state_info[0])[13] + "<br>"
-                + "Hotel Ratings Rank: " + Object.values(state_info[0])[9] + "<br>"
-                + "Dollar Value: $" + Object.values(state_info[0])[7] + "<br>"
+              tableDiv.innerHTML = "<h1>" + Object.values(state_info[0])[18] + "</h1> <hr> <h3> Rank: " + Object.values(state_info[0])[16] + "</h3> <hr> "
+                + "Average Airfare: $" + Object.values(state_info[0])[5] + "<br>"
+                + "# Passengers: " + Object.values(state_info[0])[2] + "<br>"
+                + "Average Hotel Rating: " + Object.values(state_info[0])[6] + "<br>"
+                + "Dollar Value: $" + Object.values(state_info[0])[10] + "<br>"
                 + "<hr>"
-                + "Amusement Parks: " + Object.values(state_info[0])[2] + "<br>"
-                + "Aquariums: " + Object.values(state_info[0])[3] + "<br>"
-                + "Beaches: " + Object.values(state_info[0])[4] + "<br>"
-                + "Campsites: " + Object.values(state_info[0])[5] + "<br>"
-                + "Casions: " + Object.values(state_info[0])[6] + "<br>"
-                + "Festivals: " + Object.values(state_info[0])[8] + "<br>"
-                + "Malls: " + Object.values(state_info[0])[10] + "<br>"
-                + "National Parks: " + Object.values(state_info[0])[11] + "<br>"
-                + "Zoos: " + Object.values(state_info[0])[15] + "<br>";
+                + "Amusement Parks: " + Object.values(state_info[0])[3] + "<br>"
+                + "Aquariums: " + Object.values(state_info[0])[4] + "<br>"
+                + "Beaches: " + Object.values(state_info[0])[7] + "<br>"
+                + "Campsites: " + Object.values(state_info[0])[8] + "<br>"
+                + "Casions: " + Object.values(state_info[0])[9] + "<br>"
+                + "Festivals: " + Object.values(state_info[0])[12] + "<br>"
+                + "Malls: " + Object.values(state_info[0])[14] + "<br>"
+                + "National Parks: " + Object.values(state_info[0])[15] + "<br>"
+                + "Zoos: " + Object.values(state_info[0])[19] + "<br>";
               return tableDiv;
             };
             zoomChart.addTo(map);
@@ -213,16 +196,6 @@ d3.json(rank_url, function (state_ranks) {
     return div;
   };
   legend.addTo(map);
-
-  // var zoomChart = L.control({ position: 'topright' });
-  // zoomChart.onAdd = function () {
-
-  //   // creates a div in the html with the class "legend"
-  //   var div = L.DomUtil.create('div', "pie-chart2");
-  //   return div;
-  // };
-  // zoomChart.addTo(map);
-
 });
 
 // selects each div from the html where the attractions will be displayed
@@ -297,15 +270,15 @@ function attraction_lists(state) {
     };
 
     // takes the count of each type of attraction
-    amusement_num = Object.values(state_info[0])[2];
-    aquarium_num = Object.values(state_info[0])[3];
-    beach_num = Object.values(state_info[0])[4];
-    campsite_num = Object.values(state_info[0])[5];
-    casino_num = Object.values(state_info[0])[6];
-    festival_num = Object.values(state_info[0])[8];
-    mall_num = Object.values(state_info[0])[10];
-    park_num = Object.values(state_info[0])[11];
-    zoo_num = Object.values(state_info[0])[15];
+    amusement_num = Object.values(state_info[0])[3];
+    aquarium_num = Object.values(state_info[0])[4];
+    beach_num = Object.values(state_info[0])[7];
+    campsite_num = Object.values(state_info[0])[8];
+    casino_num = Object.values(state_info[0])[9];
+    festival_num = Object.values(state_info[0])[12];
+    mall_num = Object.values(state_info[0])[14];
+    park_num = Object.values(state_info[0])[15];
+    zoo_num = Object.values(state_info[0])[19];
 
     // creates pie chart to show distribution of attractions in the selected state
     const attraction_data = {
@@ -325,23 +298,23 @@ function attraction_lists(state) {
     });
 
     // takes other pieces of data
-    airfare = Object.values(state_info[0])[1];
-    passenger = Object.values(state_info[0])[13];
-    hotel = Object.values(state_info[0])[9];
-    dollar_value = Object.values(state_info[0])[7];
+    airfare_rank = Object.values(state_info[0])[1];
+    passenger_rank = Object.values(state_info[0])[17];
+    hotel_rank = Object.values(state_info[0])[13];
+    dollar_value_rank = Object.values(state_info[0])[11];
 
     // creates bar chart to show miscellaneous of the selected state
     const misc_data = {
-      labels: ["Airfare Rank", "Passenger # Rank", "Hotel Ratings Rank", "Dollar Value"],
+      labels: ["Airfare Rank", "Passenger # Rank", "Hotel Ratings Rank", "Dollar Value Rank"],
       datasets: [
         {
           type: "bar",
-          values: [airfare, passenger, hotel, dollar_value]
+          values: [airfare_rank, passenger_rank, hotel_rank, dollar_value_rank]
         }
       ]
     };
     const bar_chart = new frappe.Chart(".bar-chart", {
-      title: "Miscellaneous Data",
+      title: "Breakdown of Rankings (1=Worst)",
       data: misc_data,
       type: 'bar',
       height: 500,
