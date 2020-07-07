@@ -18,17 +18,12 @@ This app was created during the Covid pandemic, when Americans were not allowed 
 
 ## Sources
 * Airfare & Amount of Passengers 
-  [United States Department of Transportation]
-  (https://www.transtats.bts.gov/AverageFare/)
+  [United States Department of Transportation](https://www.transtats.bts.gov/AverageFare/)
 * Hotel Rankings 
-  [Datafiniti's Business Database]
-  (https://www.kaggle.com/datafiniti/hotel-reviews?select=Datafiniti_Hotel_Reviews.csv)
-* List of Casinos, National Parks, Aquariums, Zoos, Festivals, Amusement Parks, Beaches, Malls, Campsites [Wikipedia]
-  (https://en.wikipedia.org/wiki/Tourist_attractions_in_the_United_States)
-* Campgrounds [DataWorld]
-  (https://data.world/caroline/campgrounds)
-* Value of dollar based on state [USA Today]
-  (https://www.usatoday.com/story/money/2019/05/25/us-dollar-how-much-its-worth-value-in-every-state/39501091/)
+  [Datafiniti's Business Database](https://www.kaggle.com/datafiniti/hotel-reviews?select=Datafiniti_Hotel_Reviews.csv)
+* List of Casinos, National Parks, Aquariums, Zoos, Festivals, Amusement Parks, Beaches, Malls, Campsites [Wikipedia](https://en.wikipedia.org/wiki/Tourist_attractions_in_the_United_States)
+* Campgrounds [DataWorld](https://data.world/caroline/campgrounds)
+* Value of dollar based on state [USA Today](https://www.usatoday.com/story/money/2019/05/25/us-dollar-how-much-its-worth-value-in-every-state/39501091/)
 
 ---
 
