@@ -1,4 +1,5 @@
 # Find Your Destination
+Heroku URL: [https://findyourdestinations.herokuapp.com/](https://findyourdestinations.herokuapp.com/)
 
 ## Summary
 We have created a map with an interactive dashboard for anyone looking to decide which state to travel to. Our webpage provides you a choropleth on the most popular states to travel to based on a equation created by our group. By clicking on each state, you can find information on various attractions offered, average flight costs and the value of your money there. Explore the map to find your ideal destination right at your footsteps!
