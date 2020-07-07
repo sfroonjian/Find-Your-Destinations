@@ -83,6 +83,7 @@ This app was created during the Covid pandemic, when Americans were not allowed 
 ## Steps to run the application
 **Option 1**
 1. View the page at our URL: [https://findyourdestinations.herokuapp.com/](https://findyourdestinations.herokuapp.com/)
+<!-- end of list -->
 **Option 2**
 1. Save all of the files of the repository to a local folder on your computer.
 1. Open PgAdmin and create a new database called "ustravelapp_db"
